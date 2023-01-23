@@ -17,7 +17,7 @@ const ContentDisplay = (divId, displayResult) => {
 //===================END=============================
 
 // Data load of Book Archive---------------------------------
-const bookArchiveLoadData = () => {
+const bookArchiveLoadData = async () => {
     const searchField = document.getElementById('search-field');
     const searchFieldText = searchField.value;
     // clear search field
@@ -50,9 +50,14 @@ const bookArchiveLoadData = () => {
     else{
         // fetch
         const url = `https://openlibrary.org/search.json?q=${searchFieldText}`;
-        fetch(url)
-        .then(res => res.json())
-        .then(data => displayBookArchive(data))
+        // fetch(url)
+        // .then(res => res.json())
+        // .then(data => displayBookArchive(data))
+
+        // Async await-------------
+        const res = await fetch(url);
+        const data = await res.json();
+        displayBookArchive(data)
     }
 
     
